@@ -2,22 +2,16 @@ package assets;
 
 import java.sql.Timestamp;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-import lombok.Data;
-
-@RegisterForReflection
-@Data
 public class Asset {
-	private Long id;
-
-	private String organizationId;
-	private String employeeId;
-	private String code;
-	private String name;
-	private String status;
-	private Timestamp issueDate;
-	private String createdBy;
-	private String updatedBy;
-	private Timestamp createdAt;
-	private Timestamp updatedAt;
+	public Long id;
+	public String organizationId;
+	public String employeeId;
+	public String code;
+	public String name;
+	public String status;
+	public Timestamp issueDate;
+	public String createdBy;
+	public String updatedBy;
+	public Timestamp createdAt;
+	public Timestamp updatedAt;
 }
