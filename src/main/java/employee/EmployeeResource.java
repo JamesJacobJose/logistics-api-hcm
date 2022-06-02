@@ -61,10 +61,10 @@ public class EmployeeResource {
         EmployeeEntity employeeEntity = EmployeeEntity.findById(id);
 
         if (Objects.nonNull(employee.getOrganizationId())) {
-            employeeEntity.organizationId = employee.getOrganizationId();
+            employeeEntity.organization = employee.organization;
         }
         if (Objects.nonNull(employee.getDepartmentId())) {
-            employeeEntity.departmentId = employee.getDepartmentId();
+            employeeEntity.department = employee.department();
         }
         if (Objects.nonNull(employee.getCode())) {
             employeeEntity.code = employee.getCode();
@@ -79,7 +79,7 @@ public class EmployeeResource {
             employeeEntity.designation = employee.getDesignation();
         }
         if (Objects.nonNull(employee.getDetails())) {
-            employeeEntity.details = employee.getDetails();
+            employeeEntity.details = employee.details;
         }
         if (Objects.nonNull(employee.getNotes())) {
             employeeEntity.notes = employee.getNotes();
