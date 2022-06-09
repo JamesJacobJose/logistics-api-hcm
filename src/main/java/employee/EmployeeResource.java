@@ -29,8 +29,9 @@ public class EmployeeResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response createEmployee(EmployeeEntity employeeEntity) 
+    public Response createEmployee(Employee employee) 
     {
+        EmployeeEntity employeeEntity = employeeTransformer.toEntity(employee);
         employeeEntity.persist();
         return Response.status(Status.CREATED).build();
     }
@@ -48,7 +49,7 @@ public class EmployeeResource {
     public Response getEmployeeById(@PathParam("id") Long id) 
     {
         EmployeeEntity employeeEntity = EmployeeEntity.findById(id);
-        return Response.ok(employeeEntity).build();
+        return Response.ok(employeeTransformer.toResource(employeeEntity)).build();
     }
 
     @Path("/{id}")
@@ -61,10 +62,13 @@ public class EmployeeResource {
         EmployeeEntity employeeEntity = EmployeeEntity.findById(id);
 
         if (Objects.nonNull(employee.getOrganizationId())) {
-            employeeEntity.organization = employee.organization;
+            employeeEntity.organizationId = employee.getOrganizationId();
         }
         if (Objects.nonNull(employee.getDepartmentId())) {
-            employeeEntity.department = employee.department();
+            employeeEntity.departmentId = employee.getDepartmentId();
+        }
+        if (Objects.nonNull(employee.getAssetId())) {
+            employeeEntity.assetId = employee.getAssetId();
         }
         if (Objects.nonNull(employee.getCode())) {
             employeeEntity.code = employee.getCode();
@@ -79,7 +83,7 @@ public class EmployeeResource {
             employeeEntity.designation = employee.getDesignation();
         }
         if (Objects.nonNull(employee.getDetails())) {
-            employeeEntity.details = employee.details;
+            employeeEntity.details = employee.getDetails();
         }
         if (Objects.nonNull(employee.getNotes())) {
             employeeEntity.notes = employee.getNotes();
